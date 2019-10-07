@@ -13,8 +13,19 @@ let lastX = 0;
 let lastY = 0;
 
 function draw(e) {
+    if(!isDrawing){return} //keep fn from running when not drawing
     console.log(e);
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    [lastX, lastY] = [e.offsetX, e.offsetY]
+
+
 }
 
 canvas.addEventListener('mousemove', draw)
+canvas.addEventListener('mousedown', ()=>{isDrawing = true})
+canvas.addEventListener('mouseup', ()=>{isDrawing = false})
+canvas.addEventListener('mouseout', ()=>{isDrawing = false})
 
